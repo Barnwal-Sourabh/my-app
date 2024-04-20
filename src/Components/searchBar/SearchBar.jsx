@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./SearchBar.css";
+import SavedUser from '../savedUser/SavedUser';
+import SearchResultInd from '../searchResultIndividuals/SearchResultInd';
 
 function SearchBar({ setResults }) {
     const [input, setInput] = useState("");
+    const [savedUser, setSavedUser] = useState([]);
+
     const fetchValue = function (value) {
         fetch("https://dummyjson.com/users")
             .then((response) => response.json())
@@ -18,20 +22,40 @@ function SearchBar({ setResults }) {
             .catch((error) => {
                 console.error('Error fetching data: ', error);
             });
-    };    
+    };
 
     const handleChange = function (val) {
         setInput(val);
         fetchValue(val);
     };
+
+    function updateSavedUser(newUser) {
+        setSavedUser(prevUsers => [...prevUsers, newUser]);
+    }
+
+    const removeSavedUser = (userToRemove) => {
+        setSavedUser((currentSavedUsers) => 
+            currentSavedUsers.filter((user) => user.id !== userToRemove.id)
+        );
+    };
+
     return (
         <div className="input-container">
+            {
+                savedUser.map((user, index) => {
+                    return <SavedUser key={index} user={user} removeUser={removeSavedUser} />
+                })
+            }
             <FaSearch id="search-icon" />
             <input
                 placeholder="Search by name or email"
                 value={input}
-                onChange={(item) => handleChange(item.target.value)}
+                onChange={(e) => handleChange(e.target.value)}
             />
+            {/* Render SearchResultInd components for each result */}
+            {fetchValue.map((result, index) => (
+                <SearchResultInd key={index} result={result} updateSavedUser={updateSavedUser} />
+            ))}
         </div>
     );
 }
