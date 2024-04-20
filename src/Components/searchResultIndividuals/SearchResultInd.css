@@ -1,0 +1,18 @@
+.search-result-individual {
+    padding: 10px 20px;
+    gap:0.5rem;
+    width: 100%;
+    display: flex;
+    gap:0.5rem;
+}
+.search-result-individual p{
+    display: flex;
+    flex-wrap: nowrap;
+}
+img{
+    height: 30px;
+}
+
+.search-result-individual:hover{
+    background-color: #efefef;
+}

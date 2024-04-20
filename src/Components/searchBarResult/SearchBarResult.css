@@ -1,0 +1,22 @@
+.search-result {
+    background-color: #eee;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 1rem;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.search-result::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.options{
+    background-color: white;
+    width: min-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    flex-direction: column;
+}
+
