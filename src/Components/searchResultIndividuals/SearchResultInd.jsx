@@ -1,21 +1,16 @@
 import React from "react";
 import "./SearchResultInd.css";
 
-function SearchResultInd({ result, updateSavedUser }) {
+function SearchResultInd({ result, saveUser }) {
     const handleClick = () => {
-        updateSavedUser(result);
-    };
+        saveUser(result);
+    }
 
     return (
-        <div
-            className="search-result-individual"
-            onClick={handleClick}
-        >
-            <img className="image-class" src={result.image} alt="user"/>
-            <p>
-                <span>{result.firstName}</span> {" "}
-                <span>{result.lastName}</span>
-            </p>
+        <div className="search-result-individual" onClick={handleClick}>
+            <img className="image-class profile-picture" src={result.image} alt={result.firstName}/>
+            <p className="name"> <span>{result.firstName}</span> <span>{result.lastName}</span> </p>
+            <p className="email">{ result.email}</p>
         </div>
     );
 }

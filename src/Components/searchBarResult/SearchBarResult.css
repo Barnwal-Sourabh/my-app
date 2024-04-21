@@ -8,7 +8,7 @@
 }
 
 .search-result::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
+    display: none;
 }
 
 .options{
@@ -17,6 +17,5 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
-    flex-direction: column;
+    flex-direction: column;
 }
-

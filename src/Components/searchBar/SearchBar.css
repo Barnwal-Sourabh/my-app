@@ -1,4 +1,4 @@
-.input-container{
+.input-container {
     background-color: white;
     width: 100%;
     border-radius: 5px;
@@ -7,14 +7,35 @@
     display: flex;
     align-items: center;
 }
+.saved-user-container{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 0.5rem;
+    overflow-x: auto;
+    
+}
+.saved-user-container::-webkit-scrollbar { 
+    display: none;
+}
+
+.search-container{
+    display: flex;
+    align-items: center;
+    min-width: 50%;
+    flex-grow: 1;
+}
 
 input {
     background-color: transparent;
     border: none;
     height: 100%;
-    font-size: 1.25rem;
+    font-size: 1rem;
     width: 100%;
     margin-left: 5px;
+}
+
+input::placeholder{
+    font-size: 1rem;
 }
 
 input:focus {

@@ -1,18 +1,22 @@
 .search-result-individual {
-    padding: 10px 20px;
-    gap:0.5rem;
-    width: 100%;
     display: flex;
-    gap:0.5rem;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
 }
-.search-result-individual p{
+.search-result-individual img{
+    width: 2rem;
+}
+.search-result-individual .name{
+    font-size: 1rem;
     display: flex;
-    flex-wrap: nowrap;
+    gap: 0.3rem;
 }
-img{
-    height: 30px;
+.search-result-individual .email{
+    font-size: 0.7rem;
 }
 
 .search-result-individual:hover{
-    background-color: #efefef;
+    background-color: var(--light-gray);
 }

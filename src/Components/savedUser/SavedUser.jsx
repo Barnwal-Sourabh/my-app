@@ -1,23 +1,23 @@
-import React from "react";
+import React from 'react'
+import './SavedUser.css'
+import { IoClose } from 'react-icons/io5';
 
-function SavedUser({ user, setuser}) {
+function SavedUser({ user, removeSavedUser }) {
+  const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
 
-    const capitalizeFirstLetter = (str) => {
-        return str
-            .split(" ")
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ");
-    };
+  const handleClick = () => {
+    removeSavedUser(user)
+  }
 
-    const handleClick = () => {
-        
-    }
-
-    return (
-        <div className="SavedCity"  onClick={handleClick}>
-            <p>{capitalizeFirstLetter(user)}</p>
-        </div>
-    );
+  return (
+    <div className="SavedUser">
+      <img src={user.image} alt={user.firstName} className='profile-picture' />
+      <p><span>{capitalizeFirstLetter(user.firstName)}</span> <span>{capitalizeFirstLetter(user.lastName)}</span></p>
+      <IoClose onClick={handleClick} className='close-icon' />
+    </div>
+  );
 }
 
-export default SavedUser;
+export default SavedUser

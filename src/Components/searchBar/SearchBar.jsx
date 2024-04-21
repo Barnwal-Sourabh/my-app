@@ -1,23 +1,21 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./SearchBar.css";
-import SavedUser from '../savedUser/SavedUser';
-import SearchResultInd from '../searchResultIndividuals/SearchResultInd';
+import SavedUser from "../savedUser/SavedUser";
 
-function SearchBar({ setResults }) {
+function SearchBar({ setResults, savedUser, removeSavedUser }) {
     const [input, setInput] = useState("");
-    const [savedUser, setSavedUser] = useState([]);
 
     const fetchValue = function (value) {
         fetch("https://dummyjson.com/users")
             .then((response) => response.json())
             .then((json) => {
-                console.log(json.users);
                 const results = json.users.filter((user) => {
                     const fullName = `${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}`;
-                    return fullName.includes(value.toLowerCase());
+                    const email = user.email.toLowerCase();
+                    return fullName.includes(value.toLowerCase()) || email.includes(value.toLowerCase());
                 });
-                setResults(results); // Update the state with the filtered results
+                setResults(results);
             })
             .catch((error) => {
                 console.error('Error fetching data: ', error);
@@ -29,33 +27,26 @@ function SearchBar({ setResults }) {
         fetchValue(val);
     };
 
-    function updateSavedUser(newUser) {
-        setSavedUser(prevUsers => [...prevUsers, newUser]);
-    }
-
-    const removeSavedUser = (userToRemove) => {
-        setSavedUser((currentSavedUsers) => 
-            currentSavedUsers.filter((user) => user.id !== userToRemove.id)
-        );
-    };
-
     return (
         <div className="input-container">
             {
-                savedUser.map((user, index) => {
-                    return <SavedUser key={index} user={user} removeUser={removeSavedUser} />
-                })
+                savedUser.length > 0 && savedUser && (
+                    <div className="saved-user-container">
+                        {
+                            savedUser.map(user => {
+                                return <SavedUser user={user} removeSavedUser={removeSavedUser} key={user.id} />
+                            })
+                        }
+                    </div>
+                )
             }
-            <FaSearch id="search-icon" />
-            <input
-                placeholder="Search by name or email"
-                value={input}
-                onChange={(e) => handleChange(e.target.value)}
-            />
-            {/* Render SearchResultInd components for each result */}
-            {fetchValue.map((result, index) => (
-                <SearchResultInd key={index} result={result} updateSavedUser={updateSavedUser} />
-            ))}
+            <div className="search-container">
+                <input
+                    placeholder="Search by name or email..."
+                    value={input}
+                    onChange={(item) => handleChange(item.target.value)}
+                />
+            </div>
         </div>
     );
 }
